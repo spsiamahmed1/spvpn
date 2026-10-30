@@ -22,9 +22,11 @@ jobs:
         with:
           distribution: temurin
           java-version: 17
+      - name: Accept Android licenses
+        run: yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses > /dev/null || true
       - uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: 8.7
+          gradle-version: 9.4.1
       - run: gradle assembleDebug
         working-directory: ${{ steps.find.outputs.dir }}
       - uses: actions/upload-artifact@v4
